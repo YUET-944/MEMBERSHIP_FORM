@@ -1,0 +1,93 @@
+# MySQL ERD Diagram (Text Version)
+
+## Tables and Relationships
+
+### users
+- id (bigint, primary key, auto increment)
+- name (varchar)
+- email (varchar, unique)
+- email_verified_at (timestamp, nullable)
+- password (varchar)
+- remember_token (varchar, nullable)
+- created_at (timestamp, nullable)
+- updated_at (timestamp, nullable)
+
+### profile_settings
+- id (bigint, primary key, auto increment)
+- name (varchar)
+- title (varchar, nullable)
+- bio (text, nullable)
+- profile_avatar (varchar, nullable)
+- facebook_url (varchar, nullable)
+- twitter_url (varchar, nullable)
+- linkedin_url (varchar, nullable)
+- youtube_url (varchar, nullable)
+- instagram_url (varchar, nullable)
+- created_at (timestamp, nullable)
+- updated_at (timestamp, nullable)
+
+### skills
+- id (bigint, primary key, auto increment)
+- name (varchar)
+- category (varchar, nullable)
+- level (integer, default: 0)
+- icon (varchar, nullable)
+- created_at (timestamp, nullable)
+- updated_at (timestamp, nullable)
+
+### projects
+- id (bigint, primary key, auto increment)
+- name (varchar)
+- slug (varchar, unique)
+- description (text, nullable)
+- thumbnail (varchar, nullable)
+- tags (text, nullable)
+- github_url (varchar, nullable)
+- live_url (varchar, nullable)
+- status (enum: draft, published, default: draft)
+- created_at (timestamp, nullable)
+- updated_at (timestamp, nullable)
+
+### services
+- id (bigint, primary key, auto increment)
+- title (varchar)
+- description (text, nullable)
+- icon (varchar, nullable)
+- created_at (timestamp, nullable)
+- updated_at (timestamp, nullable)
+
+### testimonials
+- id (bigint, primary key, auto increment)
+- client_name (varchar)
+- client_photo (varchar, nullable)
+- review (text)
+- rating (integer, default: 5)
+- created_at (timestamp, nullable)
+- updated_at (timestamp, nullable)
+
+### contact_messages
+- id (bigint, primary key, auto increment)
+- name (varchar)
+- email (varchar)
+- subject (varchar, nullable)
+- message (text)
+- created_at (timestamp, nullable)
+- updated_at (timestamp, nullable)
+
+## Relationships
+- users table is independent (Breeze authentication)
+- profile_settings table is independent (single record for portfolio settings)
+- skills table is independent (multiple skills)
+- projects table is independent (multiple projects)
+- services table is independent (multiple services)
+- testimonials table is independent (multiple testimonials)
+- contact_messages table is independent (multiple messages)
+
+## Notes
+- All tables use InnoDB engine
+- All tables have created_at and updated_at timestamps
+- String fields use utf8mb4_unicode_ci collation
+- The profile_settings table contains a single record for the portfolio owner's information
+- The projects table uses a slug field for SEO-friendly URLs
+- The skills table has a level field that represents proficiency from 0-100
+- The testimonials table has a rating field from 1-5 stars
