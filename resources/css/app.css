@@ -2,121 +2,194 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Premium Design System Imports */
-@import './premium.css';
+/* Import explicit color utilities */
+@import './theme-colors.css';
 
-/* Custom Styles - Light Theme */
+/* Import Ultra-Premium Design System */
+@import './ultra-premium.css';
+
+/* Global Design System - Green Theme */
 @layer base {
-    * {
-        @apply border-border;
-    }
-    
-    body {
-        @apply bg-gradient-to-br from-cream via-white to-light-gray text-dark;
-    }
+  * {
+    @apply border-gray-200;
+  }
+  
+  body {
+    @apply bg-gray-soft text-charcoal font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-charcoal;
+  }
 }
 
 @layer components {
-    /* Glassmorphism - Light Theme */
-    .glass {
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(30, 77, 43, 0.2);
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-    }
-    
-    /* Form Inputs - Light Theme */
-    .form-input {
-        @apply bg-white border-2 border-gray-200 text-dark rounded-lg px-4 py-3 transition-all;
-    }
-    
-    .form-input:focus {
-        @apply bg-white border-primary-green outline-none ring-2 ring-primary-green/10;
-    }
-    
-    .form-input::placeholder {
-        @apply text-gray-500;
-    }
-    
-    /* Important Fields - Gold Accent */
-    .form-input.important {
-        @apply border-accent-gold;
-    }
-    
-    .form-input.important:focus {
-        @apply border-accent-gold ring-accent-gold/20;
-    }
-    
-    /* Buttons - Dark Green */
-    .btn-primary {
-        @apply bg-gradient-to-r from-primary-green to-secondary-green text-white font-semibold px-6 py-3 rounded-lg transition-all shadow-md;
-    }
-    
-    .btn-primary:hover {
-        @apply transform -translate-y-0.5 shadow-lg shadow-primary-green/30;
-        background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%);
-    }
-    
-    /* Accent Button - Gold */
-    .btn-accent {
-        @apply bg-gradient-to-r from-accent-gold to-yellow-400 text-dark font-semibold px-6 py-3 rounded-lg transition-all shadow-md;
-    }
-    
-    .btn-accent:hover {
-        @apply transform -translate-y-0.5 shadow-lg shadow-accent-gold/30;
-    }
-    
-    /* Secondary Button */
-    .btn-secondary {
-        @apply bg-white text-primary-green font-semibold px-6 py-3 rounded-lg border-2 border-primary-green transition-all;
-    }
-    
-    .btn-secondary:hover {
-        @apply bg-primary-green text-white;
-    }
-    
-    /* Section Headers */
-    .section-header {
-        @apply text-primary-green border-b-4 border-primary-green pb-2 mb-6 font-bold text-2xl;
-    }
-}
-
-/* Urdu Font Support */
-.urdu-text {
-    font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
-    direction: rtl;
-    text-align: right;
+  /* Glass effect header */
+  .glass-header {
+    @apply bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-soft;
+  }
+  
+  /* Card base - Clean, minimal */
+  .card {
+    @apply bg-white rounded-card shadow-soft border border-gray-100;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-medium hover:-translate-y-1;
+  }
+  
+  /* Primary Button - Green Theme */
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-3 rounded-button font-semibold 
+           shadow-soft hover:shadow-green hover:bg-primary-dark 
+           transition-all duration-300 transform hover:-translate-y-0.5
+           focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+  
+  /* Secondary Button */
+  .btn-secondary {
+    @apply bg-white text-primary border-2 border-primary 
+           px-6 py-3 rounded-button font-semibold 
+           hover:bg-primary hover:text-white 
+           transition-all duration-300
+           focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+  
+  /* Success Button */
+  .btn-success {
+    @apply bg-primary text-white px-6 py-3 rounded-button font-semibold 
+           shadow-soft hover:shadow-green hover:bg-primary-dark 
+           transition-all duration-300
+           focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+  
+  /* Danger Button */
+  .btn-danger {
+    @apply bg-red-500 text-white px-6 py-3 rounded-button font-semibold 
+           shadow-soft hover:bg-red-600 
+           transition-all duration-300
+           focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
+  }
+  
+  /* Form inputs - Clean with green focus */
+  .form-input {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-input 
+           focus:ring-2 focus:ring-primary focus:border-primary 
+           transition-all duration-200 outline-none
+           bg-white text-charcoal;
+  }
+  
+  .form-input:focus {
+    @apply shadow-soft;
+  }
+  
+  /* Select dropdowns */
+  select.form-input {
+    @apply appearance-none bg-white;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2310B981' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+  
+  /* Textarea */
+  textarea.form-input {
+    @apply resize-y min-h-[100px];
+  }
+  
+  /* Status badges - Green theme */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  }
+  
+  .badge-success {
+    @apply bg-primary-50 text-primary-700 border border-primary-200;
+  }
+  
+  .badge-warning {
+    @apply bg-yellow-50 text-yellow-800 border border-yellow-200;
+  }
+  
+  .badge-danger {
+    @apply bg-red-50 text-red-800 border border-red-200;
+  }
+  
+  .badge-info {
+    @apply bg-blue-50 text-blue-800 border border-blue-200;
+  }
+  
+  /* Sidebar styles */
+  .sidebar {
+    @apply bg-accent-dark text-white;
+  }
+  
+  .sidebar-item {
+    @apply flex items-center px-4 py-3 text-gray-300 rounded-button 
+           transition-all duration-200 hover:bg-gray-800 hover:text-white;
+  }
+  
+  .sidebar-item.active {
+    @apply bg-primary text-white shadow-green;
+  }
+  
+  /* Step indicator */
+  .step-indicator {
+    @apply flex items-center justify-between mb-8;
+  }
+  
+  .step {
+    @apply flex items-center;
+  }
+  
+  .step-number {
+    @apply w-10 h-10 rounded-full flex items-center justify-center font-semibold
+           border-2 border-gray-300 text-gray-400 bg-white;
+  }
+  
+  .step-number.active {
+    @apply bg-primary border-primary text-white shadow-green;
+  }
+  
+  .step-number.completed {
+    @apply bg-primary-600 border-primary-600 text-white;
+  }
+  
+  .step-line {
+    @apply flex-1 h-0.5 bg-gray-300 mx-4;
+  }
+  
+  .step-line.completed {
+    @apply bg-primary;
+  }
 }
 
 /* Animations */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .fade-in {
-    animation: fadeIn 0.5s ease;
+  animation: fadeIn 0.4s ease-out;
 }
 
-/* Loading Spinner */
-.spinner {
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-top: 3px solid #40916c;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
+/* Urdu text support */
+.urdu-text {
+  font-family: 'Noto Nastaliq Urdu', serif;
+  direction: rtl;
+  text-align: right;
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+/* Smooth transitions */
+* {
+  transition-property: color, background-color, border-color, transform, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
 }
-

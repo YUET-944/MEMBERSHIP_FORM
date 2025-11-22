@@ -1,0 +1,41 @@
+/* Explicit color utilities to ensure Tailwind generates them */
+/* This file ensures all custom colors are available as utilities */
+
+.bg-primary { background-color: #10B981; }
+.bg-primary-dark { background-color: #059669; }
+.bg-primary-light { background-color: #34D399; }
+.bg-primary-50 { background-color: #ECFDF5; }
+.bg-primary-100 { background-color: #D1FAE5; }
+.bg-primary-600 { background-color: #059669; }
+.bg-primary-700 { background-color: #047857; }
+
+.text-primary { color: #10B981; }
+.text-primary-dark { color: #059669; }
+.text-primary-light { color: #34D399; }
+.text-primary-50 { color: #ECFDF5; }
+.text-primary-100 { color: #D1FAE5; }
+.text-primary-600 { color: #059669; }
+.text-primary-700 { color: #047857; }
+
+.border-primary { border-color: #10B981; }
+.border-primary-dark { border-color: #059669; }
+
+.text-charcoal { color: #1F2937; }
+.bg-charcoal { background-color: #1F2937; }
+
+.bg-gray-soft { background-color: #F9FAFB; }
+.text-gray-medium { color: #6B7280; }
+
+.bg-accent-dark { background-color: #111827; }
+.bg-accent-navy { background-color: #1E3A8A; }
+.bg-accent-teal { background-color: #0D9488; }
+
+/* Hover states */
+.hover\:bg-primary-dark:hover { background-color: #059669; }
+.hover\:text-primary-dark:hover { color: #059669; }
+.hover\:text-primary:hover { color: #10B981; }
+
+/* Focus states */
+.focus\:ring-primary:focus { --tw-ring-color: #10B981; }
+.focus\:border-primary:focus { border-color: #10B981; }
+

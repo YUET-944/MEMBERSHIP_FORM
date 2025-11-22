@@ -1,4 +1,5 @@
 import './bootstrap';
+import './toast';
 
 // CNIC Formatting
 function formatCNIC(input) {
@@ -57,6 +58,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // File uploads
     setupFileUpload('profilePicture', 'profilePreview');
 });
+
+// Import form validation
+import './form-validation';
 
 // Export for use in other scripts
 window.formatCNIC = formatCNIC;
