@@ -56,8 +56,9 @@ try {
     
     echo "✅ Connected successfully!\n\n";
     
-    // Check if database exists
-    $stmt = $pdo->query("SELECT 1 FROM pg_database WHERE datname = '$database'");
+    // Check if database exists (using prepared statement to prevent SQL injection)
+    $stmt = $pdo->prepare("SELECT 1 FROM pg_database WHERE datname = :database");
+    $stmt->execute(['database' => $database]);
     $exists = $stmt->fetch();
     
     if ($exists) {
@@ -66,9 +67,10 @@ try {
         $response = trim(fgets(STDIN));
         
         if (strtolower($response) === 'y') {
-            // Terminate connections
-            $pdo->exec("SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '$database' AND pid <> pg_backend_pid()");
-            $pdo->exec("DROP DATABASE IF EXISTS $database");
+            // Terminate connections (using identifier quoting for safety)
+            $quotedDb = $pdo->quote($database);
+            $pdo->exec("SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = $quotedDb AND pid <> pg_backend_pid()");
+            $pdo->exec("DROP DATABASE IF EXISTS $quotedDb");
             echo "✅ Dropped existing database\n";
         } else {
             echo "Using existing database.\n";
@@ -77,8 +79,9 @@ try {
         }
     }
     
-    // Create database
-    $pdo->exec("CREATE DATABASE $database");
+    // Create database (using identifier quoting for safety)
+    $quotedDb = $pdo->quote($database);
+    $pdo->exec("CREATE DATABASE $quotedDb");
     echo "✅ Database '$database' created successfully!\n\n";
     
     // Update .env if password was entered manually
