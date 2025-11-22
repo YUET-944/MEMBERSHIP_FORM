@@ -1,0 +1,756 @@
+/* 3D Glass Morphism System - Premium Effects */
+
+/* Global 3D Glass Base */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    transform: translateZ(20px);
+    box-shadow: 
+        0 8px 32px rgba(31, 38, 135, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.glass-card-3d {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 20px;
+    transform: perspective(1000px) rotateX(2deg) translateZ(30px);
+    box-shadow:
+        0 25px 50px -12px rgba(30, 77, 43, 0.25),
+        inset 0 2px 4px rgba(255, 255, 255, 0.6);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.glass-card-3d:hover {
+    transform: perspective(1000px) rotateX(1deg) translateZ(50px);
+    box-shadow:
+        0 35px 60px -12px rgba(212, 175, 55, 0.3),
+        inset 0 2px 8px rgba(255, 255, 255, 0.8);
+}
+
+/* Text Protection - Ensure No Blur on Text */
+.text-sharp,
+input,
+button span,
+label,
+select,
+option,
+.text-sharp * {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    filter: none !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 3D Glass Input Fields */
+.glass-input {
+    position: relative;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transform: translateZ(10px);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.glass-input-field {
+    width: 100%;
+    padding: 1.25rem 1rem 0.75rem;
+    background: transparent !important;
+    border: none;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    color: var(--text-charcoal);
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    position: relative;
+    z-index: 2;
+}
+
+.glass-input-field::placeholder {
+    color: transparent;
+}
+
+.glass-input-label {
+    position: absolute;
+    left: 1rem;
+    top: 1.25rem;
+    color: var(--silver);
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0 0.5rem;
+    font-size: 16px;
+    font-weight: 500;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    z-index: 3;
+}
+
+.glass-input-field:focus + .glass-input-label,
+.glass-input-field:not(:placeholder-shown) + .glass-input-label,
+.glass-input-field.has-value + .glass-input-label {
+    transform: translateY(-2rem) scale(0.85);
+    color: var(--gold-primary);
+    font-weight: 600;
+}
+
+.input-border-3d {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold-primary), var(--gold-light));
+    width: 0;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+.glass-input-field:focus ~ .input-border-3d {
+    width: 100%;
+}
+
+.input-border-3d.gold {
+    background: linear-gradient(90deg, var(--gold-primary), var(--gold-light));
+}
+
+.gold-focus-glow {
+    position: absolute;
+    inset: -2px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.glass-input-field:focus ~ .gold-focus-glow {
+    opacity: 1;
+}
+
+.glass-input:focus-within {
+    border-color: var(--gold-primary);
+    box-shadow: 
+        0 0 0 4px rgba(212, 175, 55, 0.1),
+        var(--shadow-gold-sm);
+    transform: translateZ(15px);
+}
+
+/* 3D Glass Select Fields */
+.glass-select {
+    position: relative;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transform: translateZ(10px);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.glass-select-field {
+    width: 100%;
+    padding: 1.25rem 1rem 0.75rem;
+    background: transparent !important;
+    border: none;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    color: var(--text-charcoal);
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    z-index: 2;
+    padding-right: 3rem;
+}
+
+.glass-select-field option {
+    background: white;
+    color: var(--text-charcoal);
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.glass-select::after {
+    content: '';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid var(--gold-primary);
+    pointer-events: none;
+    z-index: 3;
+}
+
+.glass-select-label {
+    position: absolute;
+    left: 1rem;
+    top: 1.25rem;
+    color: var(--silver);
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0 0.5rem;
+    font-size: 16px;
+    font-weight: 500;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    z-index: 3;
+}
+
+.glass-select-field:focus + .glass-select-label,
+.glass-select-field:not([value=""]) + .glass-select-label,
+.glass-select-field.has-value + .glass-select-label {
+    transform: translateY(-2rem) scale(0.85);
+    color: var(--gold-primary);
+    font-weight: 600;
+}
+
+.glass-select:focus-within {
+    border-color: var(--gold-primary);
+    box-shadow: 
+        0 0 0 4px rgba(212, 175, 55, 0.1),
+        var(--shadow-gold-sm);
+    transform: translateZ(15px);
+}
+
+/* 3D Glass Buttons */
+.gold-glass-btn {
+    background: linear-gradient(135deg, 
+        rgba(212, 175, 55, 0.9), 
+        rgba(184, 148, 31, 0.8));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    transform: perspective(500px) translateZ(20px);
+    box-shadow: 
+        0 10px 30px rgba(212, 175, 55, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.gold-glass-btn:hover {
+    transform: perspective(500px) translateZ(30px);
+    box-shadow: 
+        0 15px 40px rgba(212, 175, 55, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.gold-glass-btn .btn-content {
+    position: relative;
+    z-index: 2;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.btn-shine-3d {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s ease;
+    z-index: 1;
+}
+
+.gold-glass-btn:hover .btn-shine-3d {
+    left: 100%;
+}
+
+.btn-reflection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), transparent);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 3D Progress Indicator */
+.progress-3d {
+    position: relative;
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.progress-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.step-orb.completed {
+    background: linear-gradient(135deg, rgba(64, 145, 108, 0.9), rgba(45, 106, 79, 0.8));
+    border-color: var(--emerald-light);
+}
+
+.step-orb.completed .step-text {
+    color: white;
+}
+
+.step-orb {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateZ(20px);
+    box-shadow: 
+        0 8px 24px rgba(212, 175, 55, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.step-orb.active {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.9), rgba(249, 217, 118, 0.8));
+    border-color: var(--gold-primary);
+    transform: translateZ(30px) scale(1.1);
+    box-shadow: 
+        0 12px 32px rgba(212, 175, 55, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.step-text {
+    position: relative;
+    z-index: 2;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--emerald-dark);
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.step-orb.active .step-text {
+    color: white;
+}
+
+.orb-inner {
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.step-orb.active .orb-inner {
+    opacity: 1;
+}
+
+.orb-inner.gold-glow {
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.5), rgba(212, 175, 55, 0.3));
+    animation: gold-pulse 2s ease-in-out infinite;
+}
+
+@keyframes gold-pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+.glass-line {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.3), rgba(212, 175, 55, 0.1));
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    margin: 0 0.5rem;
+    transform: translateZ(10px);
+    border-radius: 1px;
+    transition: all 0.4s ease;
+}
+
+@media (max-width: 768px) {
+    .glass-line {
+        width: 40px;
+    }
+    
+    .progress-steps {
+        gap: 0.5rem;
+    }
+}
+
+/* 3D Form Container */
+.form-container-3d {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 20px;
+    padding: 3rem;
+    transform: perspective(1000px) translateZ(20px);
+    box-shadow:
+        0 25px 50px -12px rgba(30, 77, 43, 0.25),
+        inset 0 2px 4px rgba(255, 255, 255, 0.6);
+    position: relative;
+    overflow: hidden;
+}
+
+.form-container-3d::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--emerald-dark), var(--gold-primary));
+    z-index: 1;
+}
+
+/* Floating Shapes 3D */
+.floating-shapes-3d {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.shape-3d {
+    position: absolute;
+    border-radius: 50%;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    animation: float-3d 20s ease-in-out infinite;
+}
+
+.shape-3d.shape-1 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.2), transparent);
+    top: -150px;
+    right: -150px;
+    transform: translateZ(10px);
+}
+
+.shape-3d.shape-2 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(64, 145, 108, 0.2), transparent);
+    bottom: -125px;
+    left: -125px;
+    transform: translateZ(15px);
+    animation-delay: 5s;
+}
+
+.shape-3d.shape-3 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(247, 250, 252, 0.3), transparent);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(5px);
+    animation-delay: 10s;
+}
+
+@keyframes float-3d {
+    0%, 100% { 
+        transform: translateY(0px) translateZ(10px) rotate(0deg);
+    }
+    50% { 
+        transform: translateY(-30px) translateZ(20px) rotate(180deg);
+    }
+}
+
+/* Section Headers 3D */
+.section-header-3d {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--emerald-dark);
+    margin-bottom: 1rem;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.gold-underline-3d {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold-primary), var(--gold-light));
+    margin: 0 auto;
+    border-radius: 2px;
+    transform: translateZ(10px);
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+}
+
+/* Input Group 3D */
+.input-group-3d {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.input-group-3d.full-width {
+    grid-column: 1 / -1;
+}
+
+.input-container {
+    position: relative;
+}
+
+.input-hint {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--silver);
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Label Icons */
+.label-icon {
+    margin-right: 0.5rem;
+    font-size: 1.125rem;
+}
+
+.label-icon.gold {
+    filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.3));
+}
+
+/* Validation Badge */
+.validation-badge {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 4;
+}
+
+.glass-badge {
+    background: rgba(64, 145, 108, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(64, 145, 108, 0.3);
+    color: var(--emerald-dark);
+}
+
+.glass-input-field.valid ~ .validation-badge {
+    opacity: 1;
+}
+
+.badge-text {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* 3D Dashboard Cards */
+.stat-card-3d {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transform: perspective(1000px) translateZ(20px);
+    box-shadow: 
+        0 8px 32px rgba(31, 38, 135, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card-3d:hover {
+    transform: perspective(1000px) translateZ(30px);
+    box-shadow: 
+        0 12px 40px rgba(31, 38, 135, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.stat-card-3d.emerald-tint {
+    border-left: 4px solid var(--emerald-light);
+}
+
+.stat-card-3d.gold-tint {
+    border-left: 4px solid var(--gold-primary);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(255, 255, 255, 0.75));
+}
+
+.stat-icon-3d {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transform: translateZ(10px);
+}
+
+.gold-glass {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(249, 217, 118, 0.2));
+    border: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.emerald-glass {
+    background: linear-gradient(135deg, rgba(64, 145, 108, 0.3), rgba(45, 106, 79, 0.2));
+    border: 1px solid rgba(64, 145, 108, 0.4);
+}
+
+.pearl-glass {
+    background: linear-gradient(135deg, rgba(247, 250, 252, 0.5), rgba(255, 255, 255, 0.3));
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.icon-text {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-container-3d {
+        padding: 2rem 1.5rem;
+    }
+    
+    .glass-card-3d {
+        transform: perspective(1000px) translateZ(20px);
+    }
+    
+    .stat-card-3d {
+        transform: perspective(1000px) translateZ(15px);
+    }
+}
+
+/* Hardware Acceleration */
+.glass-panel,
+.glass-card-3d,
+.glass-input,
+.glass-select,
+.gold-glass-btn {
+    will-change: transform;
+    transform-style: preserve-3d;
+}
+
+/* Quick Action Cards 3D */
+.quick-action-card.glass-card-3d,
+.quick-action-btn.glass-card-3d {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transform: perspective(1000px) translateZ(20px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.quick-action-card.glass-card-3d:hover,
+.quick-action-btn.glass-card-3d:hover {
+    transform: perspective(1000px) translateZ(30px);
+    box-shadow:
+        0 12px 40px rgba(212, 175, 55, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Welcome Card 3D */
+.welcome-card.glass-card-3d {
+    background: linear-gradient(135deg, 
+        rgba(26, 71, 42, 0.9), 
+        rgba(45, 106, 79, 0.8));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transform: perspective(1000px) translateZ(25px);
+}
+
+/* Certificate Card 3D */
+.certificate-card.glass-card-3d {
+    background: linear-gradient(135deg, 
+        rgba(212, 175, 55, 0.9), 
+        rgba(249, 217, 118, 0.8));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transform: perspective(1000px) translateZ(25px);
+}
+
+/* Profile Overview 3D */
+.profile-overview.glass-card-3d {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transform: perspective(1000px) translateZ(20px);
+}
+
+/* Activity Stream 3D */
+.activity-stream.glass-card-3d {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transform: perspective(1000px) translateZ(20px);
+}
+
+/* Pending Approvals 3D */
+.pending-approvals-card.glass-card-3d {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transform: perspective(1000px) translateZ(20px);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .glass-card-3d,
+    .stat-card-3d,
+    .shape-3d {
+        animation: none;
+        transition: none;
+    }
+}
+

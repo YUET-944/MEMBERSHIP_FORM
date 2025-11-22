@@ -1,73 +1,194 @@
-# Laravel Portfolio Website
+# National-Level Individual Membership System
 
-A complete, production-ready Portfolio Website built with Laravel 11, MySQL, TailwindCSS, Blade components, and Laravel Breeze for authentication.
+## 🔐 High-Security Laravel + PostgreSQL Membership Platform
 
-## Features
+A government-grade membership management system with enterprise-level security, encryption, and compliance features.
 
-### Public Portfolio Website
-- Hero section with name, title, avatar
-- About section
-- Skills section (icons + levels)
-- Projects section (with project thumbnails, GitHub link, live link, tags)
-- Services section
-- Testimonials section
-- Contact page with form
-- Footer with social links
+---
+
+## 🛡️ Security Features
+
+| Security Layer | Implementation | Purpose |
+|----------------|----------------|---------|
+| **Data Encryption** | AES-256 | Encrypts CNIC, Email, Phone, Address, Documents |
+| **Password Hashing** | Argon2id | Secure, modern password hashing |
+| **Communication** | TLS 1.3 | End-to-end encrypted communication |
+| **Database** | PostgreSQL RLS | Row-Level Security for data isolation |
+| **Authentication** | Laravel Sanctum + 2FA | Multi-factor authentication |
+| **Session Security** | HttpOnly + Secure Cookies | Prevents session hijacking |
+| **Rate Limiting** | Custom Middleware | Brute force protection |
+| **Input Validation** | Laravel Validation | SQL Injection & XSS prevention |
+| **File Security** | Antivirus Scan + Encryption | Secure document storage |
+| **Audit Logging** | Immutable Logs | Complete activity tracking |
+
+---
+
+## 📋 Requirements
+
+- PHP >= 8.2
+- PostgreSQL >= 14.0
+- Composer
+- Node.js >= 18.0
+- OpenSSL extension
+- BCMath extension
+
+---
+
+## 🚀 Installation
+
+### 1. Clone and Install Dependencies
+
+```bash
+composer install
+npm install
+```
+
+### 2. Environment Configuration
+
+```bash
+cp .env.example .env
+php artisan key:generate
+php artisan jwt:secret
+```
+
+### 3. Database Setup
+
+```bash
+# Configure .env with PostgreSQL credentials
+php artisan migrate
+php artisan db:seed
+```
+
+### 4. Generate Encryption Keys
+
+```bash
+php artisan encryption:generate-keys
+```
+
+### 5. Start Development Server
+
+```bash
+php artisan serve
+npm run dev
+```
+
+---
+
+## 📁 Project Structure
+
+```
+membership-form/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── Auth/
+│   │   │   ├── Member/
+│   │   │   └── Admin/
+│   │   ├── Middleware/
+│   │   │   ├── EncryptionMiddleware.php
+│   │   │   ├── SecurityHeaders.php
+│   │   │   └── RateLimitMiddleware.php
+│   │   └── Requests/
+│   ├── Models/
+│   │   ├── Member.php
+│   │   ├── OtpVerification.php
+│   │   └── SecurityLog.php
+│   ├── Services/
+│   │   ├── EncryptionService.php
+│   │   ├── OtpService.php
+│   │   ├── TwoFactorService.php
+│   │   └── CertificateService.php
+│   └── Traits/
+│       └── EncryptsAttributes.php
+├── database/
+│   ├── migrations/
+│   └── seeders/
+├── routes/
+│   ├── api.php
+│   ├── web.php
+│   └── admin.php
+├── tests/
+│   ├── Feature/
+│   └── Unit/
+└── docs/
+    ├── API.md
+    ├── SECURITY.md
+    └── DEPLOYMENT.md
+```
+
+---
+
+## 🔑 Key Features
+
+### Membership Registration
+- Multi-step secure form
+- CNIC-based gender/region detection
+- Document upload with encryption
+- OTP verification (Email + SMS)
+- Automatic membership ID generation
 
 ### Admin Panel
-- Dashboard with statistics
-- Profile management (name, title, bio, social links, avatar selection)
-- Skills management (CRUD operations)
-- Projects management (CRUD operations)
-- Services management (CRUD operations)
-- Testimonials management (CRUD operations)
-- Contact messages management (view and delete)
+- Role-Based Access Control (RBAC)
+- Member approval/rejection
+- Document verification
+- PDF certificate generation with QR codes
+- Comprehensive audit logs
 
-## Technical Implementation
+### Member Dashboard
+- Profile management
+- Certificate download
+- Membership renewal
+- Document updates
+- Activity history
 
-### Backend
-- Laravel 11 framework
-- MySQL database
-- Laravel Breeze for authentication
-- MVC architecture
-- Form request validation
-- Repository pattern (optional)
-- Laravel Policies for admin access
-- Database migrations and seeders
+---
 
-### Frontend
-- TailwindCSS for styling
-- Blade components for reusable UI elements
-- Responsive design
-- Modern, premium, gradient-based design
-- Glassmorphism elements
-- Smooth animations
+## 🔒 Security Best Practices
 
-### Database Structure
-- Users (Breeze)
-- Profile Settings
-- Skills
-- Projects
-- Services
-- Testimonials
-- Contact Messages
+1. **Never commit `.env` file**
+2. **Rotate encryption keys regularly**
+3. **Use HTTPS in production**
+4. **Enable PostgreSQL RLS policies**
+5. **Monitor security logs daily**
+6. **Keep dependencies updated**
+7. **Regular security audits**
 
-## Installation
+---
 
-1. Clone the repository
-2. Run `composer install`
-3. Copy `.env.example` to `.env` and configure your database settings
-4. Run `php artisan key:generate`
-5. Run `php artisan migrate`
-6. Run `php artisan db:seed` to populate with sample data
-7. Run `npm install` and `npm run dev` to compile assets
-8. Start the development server with `php artisan serve`
+## 📚 Documentation
 
-## Deployment
-See `DEPLOYMENT_INSTRUCTIONS.md` for detailed deployment instructions for Hostinger hPanel.
+- [API Documentation](docs/API.md)
+- [Security Guide](docs/SECURITY.md)
+- [Deployment Guide](docs/DEPLOYMENT.md)
 
-## Database ERD
-See `ERD.txt` for the text-based database entity relationship diagram.
+---
 
-## License
-This project is open-source and available under the MIT License.
+## 🧪 Testing
+
+```bash
+# Run all tests
+php artisan test
+
+# Run security tests
+php artisan test --filter Security
+
+# Run with coverage
+php artisan test --coverage
+```
+
+---
+
+## 📝 License
+
+MIT License - See LICENSE file for details
+
+---
+
+## 👥 Support
+
+For security issues, please contact the security team directly.
+
+---
+
+**Built with ❤️ for National-Level Security Standards**
+

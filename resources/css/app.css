@@ -1,3 +1,122 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Premium Design System Imports */
+@import './premium.css';
+
+/* Custom Styles - Light Theme */
+@layer base {
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-gradient-to-br from-cream via-white to-light-gray text-dark;
+    }
+}
+
+@layer components {
+    /* Glassmorphism - Light Theme */
+    .glass {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(30, 77, 43, 0.2);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Form Inputs - Light Theme */
+    .form-input {
+        @apply bg-white border-2 border-gray-200 text-dark rounded-lg px-4 py-3 transition-all;
+    }
+    
+    .form-input:focus {
+        @apply bg-white border-primary-green outline-none ring-2 ring-primary-green/10;
+    }
+    
+    .form-input::placeholder {
+        @apply text-gray-500;
+    }
+    
+    /* Important Fields - Gold Accent */
+    .form-input.important {
+        @apply border-accent-gold;
+    }
+    
+    .form-input.important:focus {
+        @apply border-accent-gold ring-accent-gold/20;
+    }
+    
+    /* Buttons - Dark Green */
+    .btn-primary {
+        @apply bg-gradient-to-r from-primary-green to-secondary-green text-white font-semibold px-6 py-3 rounded-lg transition-all shadow-md;
+    }
+    
+    .btn-primary:hover {
+        @apply transform -translate-y-0.5 shadow-lg shadow-primary-green/30;
+        background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%);
+    }
+    
+    /* Accent Button - Gold */
+    .btn-accent {
+        @apply bg-gradient-to-r from-accent-gold to-yellow-400 text-dark font-semibold px-6 py-3 rounded-lg transition-all shadow-md;
+    }
+    
+    .btn-accent:hover {
+        @apply transform -translate-y-0.5 shadow-lg shadow-accent-gold/30;
+    }
+    
+    /* Secondary Button */
+    .btn-secondary {
+        @apply bg-white text-primary-green font-semibold px-6 py-3 rounded-lg border-2 border-primary-green transition-all;
+    }
+    
+    .btn-secondary:hover {
+        @apply bg-primary-green text-white;
+    }
+    
+    /* Section Headers */
+    .section-header {
+        @apply text-primary-green border-b-4 border-primary-green pb-2 mb-6 font-bold text-2xl;
+    }
+}
+
+/* Urdu Font Support */
+.urdu-text {
+    font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
+    direction: rtl;
+    text-align: right;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease;
+}
+
+/* Loading Spinner */
+.spinner {
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #40916c;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
